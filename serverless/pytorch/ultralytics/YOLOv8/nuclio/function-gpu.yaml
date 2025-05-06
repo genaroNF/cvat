@@ -1,0 +1,68 @@
+# This file configures the GPU serverless function
+metadata:
+  name: gpu-pth-ultralytics-yolov8 # Name of the serverless function (displayed in nuclio)
+  namespace: cvat # Isolation level (displayed in Nuclio)
+  annotations:
+    name: GPU YOLOv8 by Ultralytics # The display name inside of CVAT
+    type: detector
+    framework: pytorch
+    spec: |
+      [
+        { "id": 0, "name": "Ant road", "type": "mask" }
+      ]
+
+spec:
+  description: GPU YOLOv8 by Ultralytics
+  runtime: 'python:3.8' # Runtime langauge (default: python:3.6)
+  handler: main:handler # Entry point to the serverless function
+  eventTimeout: 30s
+
+  build:
+    image: cvat.pth.fraunhofer.uam_upernet.gpu # Docker image name
+    baseImage: ultralytics/ultralytics # The base container on which the serverless function is to be built
+
+    directives:
+      preCopy:
+        - kind: USER
+          value: root
+      # set NVIDIA container runtime settings
+        - kind: ENV
+          value: NVIDIA_VISIBLE_DEVICES=all
+        - kind: ENV
+          value: NVIDIA_DRIVER_CAPABILITIES=compute,utility
+        - kind: ENV
+          value: RUN_ON_GPU="true"
+        # Ensure Python is mapped to Python3
+        - kind: RUN
+          value: export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install -y python-is-python3
+        # Install required Python requirements
+        - kind: RUN
+          value: pip install --no-cache-dir opencv-python-headless pillow pyyaml
+        - kind: RUN
+          value: pip uninstall -y torch torchvision torchaudio
+        - kind: RUN
+          value: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+        - kind: WORKDIR
+          value: /opt/nuclio
+
+  # Parameters to handle incoming HTTP requests
+  triggers:
+    myHttpTrigger:
+      maxWorkers: 1
+      kind: 'http'
+      workerAvailabilityTimeoutMilliseconds: 10000
+      attributes:
+        maxRequestBodySize: 67108864 # 64MB
+
+  # Further required GPU parameters
+  resources:
+    limits:
+      nvidia.com/gpu: 1
+
+  # Further required parameters to run the function
+  platform:
+    attributes:
+      restartPolicy:
+        name: always
+        maximumRetryCount: 3
+      mountMode: volume
