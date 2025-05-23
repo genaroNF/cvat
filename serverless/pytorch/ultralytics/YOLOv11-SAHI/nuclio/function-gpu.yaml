@@ -1,18 +1,18 @@
 # This file configures the GPU serverless function
 metadata:
-  name: gpu-pth-ultralytics-yolov8 # Name of the serverless function (displayed in nuclio)
+  name: gpu-yolov11-sahi-ants # Name of the serverless function (displayed in nuclio)
   namespace: cvat # Isolation level (displayed in Nuclio)
   annotations:
-    name: GPU YOLOv8 by Ultralytics # The display name inside of CVAT
+    name: GPU YOLOv11 with SAHI for ants # The display name inside of CVAT
     type: detector
     framework: pytorch
     spec: |
       [
-        { "id": 0, "name": "Ant road", "type": "mask" }
+        { "id": 0, "name": "Ant", "type": "rectangle" }
       ]
 
 spec:
-  description: GPU YOLOv8 by Ultralytics
+  description: GPU YOLOv11 with SAHI for ants
   runtime: 'python:3.9' # Runtime langauge (default: python:3.6)
   handler: main:handler # Entry point to the serverless function
   eventTimeout: 30s
@@ -42,6 +42,8 @@ spec:
           value: pip uninstall -y torch torchvision torchaudio
         - kind: RUN
           value: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+        - kind: RUN
+          value: pip install sahi
         - kind: WORKDIR
           value: /opt/nuclio
 
