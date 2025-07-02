@@ -1,0 +1,139 @@
+metadata:
+  name: gpu-pth-ultralytics-yolo11-seg
+  namespace: cvat
+  annotations:
+    name: GPU YOLO11-seg by Ultralytics
+    type: detector
+    framework: pytorch
+    spec: |
+      [
+        { "id": 0, "name": "person", "type": "mask" },
+        { "id": 1, "name": "bicycle", "type": "mask" },
+        { "id": 2, "name": "car", "type": "mask" },
+        { "id": 3, "name": "motorcycle", "type": "mask" },
+        { "id": 4, "name": "airplane", "type": "mask" },
+        { "id": 5, "name": "bus", "type": "mask" },
+        { "id": 6, "name": "train", "type": "mask" },
+        { "id": 7, "name": "truck", "type": "mask" },
+        { "id": 8, "name": "boat", "type": "mask" },
+        { "id": 9, "name": "traffic light", "type": "mask" },
+        { "id": 10, "name": "fire hydrant", "type": "mask" },
+        { "id": 11, "name": "stop sign", "type": "mask" },
+        { "id": 12, "name": "parking meter", "type": "mask" },
+        { "id": 13, "name": "bench", "type": "mask" },
+        { "id": 14, "name": "bird", "type": "mask" },
+        { "id": 15, "name": "cat", "type": "mask" },
+        { "id": 16, "name": "dog", "type": "mask" },
+        { "id": 17, "name": "horse", "type": "mask" },
+        { "id": 18, "name": "sheep", "type": "mask" },
+        { "id": 19, "name": "cow", "type": "mask" },
+        { "id": 20, "name": "elephant", "type": "mask" },
+        { "id": 21, "name": "bear", "type": "mask" },
+        { "id": 22, "name": "zebra", "type": "mask" },
+        { "id": 23, "name": "giraffe", "type": "mask" },
+        { "id": 24, "name": "backpack", "type": "mask" },
+        { "id": 25, "name": "umbrella", "type": "mask" },
+        { "id": 26, "name": "handbag", "type": "mask" },
+        { "id": 27, "name": "tie", "type": "mask" },
+        { "id": 28, "name": "suitcase", "type": "mask" },
+        { "id": 29, "name": "frisbee", "type": "mask" },
+        { "id": 30, "name": "skis", "type": "mask" },
+        { "id": 31, "name": "snowboard", "type": "mask" },
+        { "id": 32, "name": "sports ball", "type": "mask" },
+        { "id": 33, "name": "kite", "type": "mask" },
+        { "id": 34, "name": "baseball bat", "type": "mask" },
+        { "id": 35, "name": "baseball glove", "type": "mask" },
+        { "id": 36, "name": "skateboard", "type": "mask" },
+        { "id": 37, "name": "surfboard", "type": "mask" },
+        { "id": 38, "name": "tennis racket", "type": "mask" },
+        { "id": 39, "name": "bottle", "type": "mask" },
+        { "id": 40, "name": "wine glass", "type": "mask" },
+        { "id": 41, "name": "cup", "type": "mask" },
+        { "id": 42, "name": "fork", "type": "mask" },
+        { "id": 43, "name": "knife", "type": "mask" },
+        { "id": 44, "name": "spoon", "type": "mask" },
+        { "id": 45, "name": "bowl", "type": "mask" },
+        { "id": 46, "name": "banana", "type": "mask" },
+        { "id": 47, "name": "apple", "type": "mask" },
+        { "id": 48, "name": "sandwich", "type": "mask" },
+        { "id": 49, "name": "orange", "type": "mask" },
+        { "id": 50, "name": "broccoli", "type": "mask" },
+        { "id": 51, "name": "carrot", "type": "mask" },
+        { "id": 52, "name": "hot dog", "type": "mask" },
+        { "id": 53, "name": "pizza", "type": "mask" },
+        { "id": 54, "name": "donut", "type": "mask" },
+        { "id": 55, "name": "cake", "type": "mask" },
+        { "id": 56, "name": "chair", "type": "mask" },
+        { "id": 57, "name": "couch", "type": "mask" },
+        { "id": 58, "name": "potted plant", "type": "mask" },
+        { "id": 59, "name": "bed", "type": "mask" },
+        { "id": 60, "name": "dining table", "type": "mask" },
+        { "id": 61, "name": "toilet", "type": "mask" },
+        { "id": 62, "name": "tv", "type": "mask" },
+        { "id": 63, "name": "laptop", "type": "mask" },
+        { "id": 64, "name": "mouse", "type": "mask" },
+        { "id": 65, "name": "remote", "type": "mask" },
+        { "id": 66, "name": "keyboard", "type": "mask" },
+        { "id": 67, "name": "cell phone", "type": "mask" },
+        { "id": 68, "name": "microwave", "type": "mask" },
+        { "id": 69, "name": "oven", "type": "mask" },
+        { "id": 70, "name": "toaster", "type": "mask" },
+        { "id": 71, "name": "sink", "type": "mask" },
+        { "id": 72, "name": "refrigerator", "type": "mask" },
+        { "id": 73, "name": "book", "type": "mask" },
+        { "id": 74, "name": "clock", "type": "mask" },
+        { "id": 75, "name": "vase", "type": "mask" },
+        { "id": 76, "name": "scissors", "type": "mask" },
+        { "id": 77, "name": "teddy bear", "type": "mask" },
+        { "id": 78, "name": "hair drier", "type": "mask" },
+        { "id": 79, "name": "toothbrush", "type": "mask" }
+      ]
+
+spec:
+  description: GPU YOLOv8 by Ultralytics
+  runtime: 'python:3.9'
+  handler: main:handler
+  eventTimeout: 30s
+
+  build:
+    image: cvat.pth.fraunhofer.uam_upernet.gpu
+    baseImage: ultralytics/ultralytics
+    directives:
+      preCopy:
+        - kind: USER
+          value: root
+        - kind: ENV
+          value: NVIDIA_VISIBLE_DEVICES=all
+        - kind: ENV
+          value: NVIDIA_DRIVER_CAPABILITIES=compute,utility
+        - kind: ENV
+          value: RUN_ON_GPU="true"
+        - kind: RUN
+          value: export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install -y python-is-python3
+        - kind: RUN
+          value: pip install --no-cache-dir opencv-python-headless pillow pyyaml
+        - kind: RUN
+          value: pip uninstall -y torch torchvision torchaudio
+        - kind: RUN
+          value: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+        - kind: WORKDIR
+          value: /opt/nuclio
+
+  triggers:
+    myHttpTrigger:
+      maxWorkers: 1
+      kind: 'http'
+      workerAvailabilityTimeoutMilliseconds: 10000
+      attributes:
+        maxRequestBodySize: 524288000
+
+  resources:
+    limits:
+      nvidia.com/gpu: 1
+
+  platform:
+    attributes:
+      restartPolicy:
+        name: always
+        maximumRetryCount: 3
+      mountMode: volume
